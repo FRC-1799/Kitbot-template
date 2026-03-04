@@ -12,6 +12,8 @@ import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import static edu.wpi.first.units.Units.RotationsPerSecond;
 import static frc.robot.Constants.FuelConstants.*;
 
 public class CANFuelSubsystem extends SubsystemBase {
@@ -38,6 +40,8 @@ public class CANFuelSubsystem extends SubsystemBase {
     launcherConfig.smartCurrentLimit(LAUNCHER_MOTOR_CURRENT_LIMIT);
     intakeLauncherRoller.configure(launcherConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
+
+
     // put default values for various fuel operations onto the dashboard
     // all commands using this subsystem pull values from the dashbaord to allow
     // you to tune the values easily, and then replace the values in Constants.java
@@ -52,6 +56,7 @@ public class CANFuelSubsystem extends SubsystemBase {
   // A method to set the voltage of the intake roller
   public void setIntakeLauncherRoller(double voltage) {
     intakeLauncherRoller.setVoltage(voltage);
+    
   }
 
   // A method to set the voltage of the intake roller
@@ -65,8 +70,13 @@ public class CANFuelSubsystem extends SubsystemBase {
     intakeLauncherRoller.set(0);
   }
 
+  public boolean shouldShoot() {
+    return intakeLauncherRoller.getAbsoluteEncoder().getVelocity() > SHOOT_VELOCITY;
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Velo in RPMs", intakeLauncherRoller.getAbsoluteEncoder().getVelocity());
   }
 }

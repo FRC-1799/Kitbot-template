@@ -45,6 +45,11 @@ public final class Constants {
     public static final double LAUNCHING_LAUNCHER_VOLTAGE = 10.6;
     public static final double SPIN_UP_FEEDER_VOLTAGE = -6;
     public static final double SPIN_UP_SECONDS = 1;
+    public static final double SHOOT_VELOCITY = 8.0;
+
+    public static final boolean REAL_INTAKE = false;
+
+
   }
 
   public static final class OperatorConstants {
